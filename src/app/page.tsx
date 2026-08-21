@@ -1,69 +1,224 @@
-import Image from "next/image";
+import { CalendarDays } from "lucide-react";
+
+import { MetricCard } from "@/components/dashboard/metric-card";
+import { DashboardListItem } from "@/components/dashboard/dashboard-list-item";
+import { WeeklyGoalItem } from "@/components/dashboard/weekly-goal-item";
+import { RecordItem } from "@/components/dashboard/record-item";
+import { MiniLineChart } from "@/components/charts/mini-line-chart";
+
+import { cn } from "@/lib/utils";
+import { categoryStyles } from "@/lib/category-styles";
+import { formatNumber } from "@/lib/format";
+
+import {
+  activeDashboard,
+  categories,
+  dailyStepsGoal,
+  fitnessMetrics,
+  myDashboards,
+  recentRecords,
+  weeklyGoals,
+  weeklyStepsSeries,
+  weeklyStepsTotal,
+} from "@/data/overview-mock";
 
 export default function Home() {
+  const categoryLabel =
+    categories.find(
+      (category) =>
+        category.key === activeDashboard.category
+    )?.label ?? activeDashboard.category;
+
+  const categoryStyle =
+    categoryStyles[activeDashboard.category];
+
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-7">
+      <header className="border-b border-border pb-5">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+          <div>
+            <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.1em] text-muted-foreground">
+              Visão geral
+            </p>
+
+            <div className="flex items-center gap-2.5">
+              <span
+                className={cn(
+                  "size-2",
+                  categoryStyle.dot
+                )}
+              />
+
+              <h1 className="text-2xl font-semibold tracking-tight text-foreground">
+                {activeDashboard.title}
+              </h1>
+            </div>
+
+            <p className="mt-1.5 text-sm text-muted-foreground">
+              {categoryLabel}
+            </p>
+          </div>
+
+          <div className="flex items-center gap-2 text-xs text-muted-foreground">
+            <CalendarDays className="size-3.5" />
+
+            <span>Período</span>
+
+            <span className="font-mono font-medium text-foreground">
+              {activeDashboard.period}
+            </span>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
+      </header>
+
+      <section aria-labelledby="metricas-heading">
+        <h2 id="metricas-heading" className="sr-only">
+          Métricas principais
+        </h2>
+
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          {fitnessMetrics.map((metric) => (
+            <MetricCard
+              key={metric.id}
+              metric={metric}
             />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
+          ))}
         </div>
-      </main>
+      </section>
+
+      <section
+        aria-labelledby="steps-chart-heading"
+        className="border border-border bg-card"
+      >
+        <div className="flex flex-col gap-2 border-b border-border px-4 py-3 sm:flex-row sm:items-center sm:justify-between">
+          <div>
+            <h2
+              id="steps-chart-heading"
+              className="text-sm font-medium text-foreground"
+            >
+              Passos
+            </h2>
+
+            <p className="mt-0.5 text-xs text-muted-foreground">
+              Distribuição diária no período selecionado
+            </p>
+          </div>
+
+          <div className="text-left sm:text-right">
+            <p className="font-mono text-lg font-medium tabular-nums text-foreground">
+              {formatNumber(weeklyStepsTotal)}
+            </p>
+
+            <p className="text-[11px] uppercase tracking-wide text-muted-foreground">
+              total no período
+            </p>
+          </div>
+        </div>
+
+        <div className="px-4 pb-3 pt-5">
+          <MiniLineChart
+            data={weeklyStepsSeries}
+            goal={dailyStepsGoal}
+            goalLabel="Meta diária"
+            className="h-64 w-full"
+          />
+        </div>
+      </section>
+
+      <section
+  aria-labelledby="tracking-heading"
+  className="overflow-hidden rounded-lg border border-border bg-card"
+>
+  <div className="px-4 py-3">
+    <h2
+      id="tracking-heading"
+      className="text-sm font-medium text-foreground"
+    >
+      Acompanhamento semanal
+    </h2>
+
+    <p className="mt-0.5 text-xs text-muted-foreground">
+      Progresso das metas e atividade recente
+    </p>
+  </div>
+
+  <div className="grid grid-cols-1 gap-6 px-4 pb-4 lg:grid-cols-[1.1fr_0.9fr]">
+    <div>
+      <div className="mb-4 flex items-baseline justify-between">
+        <h3 className="text-xs font-medium uppercase tracking-[0.08em] text-muted-foreground">
+          Metas
+        </h3>
+
+        <span className="font-mono text-[11px] text-muted-foreground">
+          {weeklyGoals.length} indicadores
+        </span>
+      </div>
+
+      <div className="flex flex-col gap-5">
+        {weeklyGoals.map((goal) => (
+          <WeeklyGoalItem
+            key={goal.id}
+            goal={goal}
+          />
+        ))}
+      </div>
+    </div>
+
+    <div>
+      <div className="mb-1 flex items-baseline justify-between">
+        <h3 className="text-xs font-medium uppercase tracking-[0.08em] text-muted-foreground">
+          Últimos registros
+        </h3>
+
+        <span className="font-mono text-[11px] text-muted-foreground">
+          Recentes
+        </span>
+      </div>
+
+      <div className="divide-y divide-border">
+        {recentRecords.map((record) => (
+          <RecordItem
+            key={record.id}
+            record={record}
+          />
+        ))}
+      </div>
+    </div>
+  </div>
+</section>
+
+      <section
+  aria-labelledby="dashboards-heading"
+  className="overflow-hidden rounded-lg border border-border bg-card"
+>
+  <div className="flex items-center justify-between border-b border-border px-4 py-3">
+    <div>
+      <h2
+        id="dashboards-heading"
+        className="text-sm font-medium text-foreground"
+      >
+        Meus dashboards
+      </h2>
+
+      <p className="mt-0.5 text-xs text-muted-foreground">
+        Acesse e acompanhe seus outros painéis
+      </p>
+    </div>
+
+    <span className="font-mono text-xs tabular-nums text-muted-foreground">
+      {myDashboards.length}
+    </span>
+  </div>
+
+  <div className="px-4">
+    {myDashboards.map((dashboard) => (
+      <DashboardListItem
+        key={dashboard.id}
+        dashboard={dashboard}
+      />
+    ))}
+  </div>
+</section>
     </div>
   );
 }
