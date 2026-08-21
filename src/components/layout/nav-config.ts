@@ -1,8 +1,10 @@
 import type { LucideIcon } from "lucide-react";
+
 import {
   BarChart3,
   LayoutDashboard,
   LayoutTemplate,
+  PanelsTopLeft,
   Settings,
 } from "lucide-react";
 
@@ -17,6 +19,11 @@ export const primaryNav: NavItem[] = [
     title: "Visão geral",
     href: "/dashboard",
     icon: LayoutDashboard,
+  },
+  {
+    title: "Meus dashboards",
+    href: "/dashboards",
+    icon: PanelsTopLeft,
   },
   {
     title: "Análises",

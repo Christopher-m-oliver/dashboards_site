@@ -67,11 +67,12 @@ export default function RegisterPage() {
           </div>
 
           <Button
-            className="w-full"
-            render={<Link href="/dashboard" />}
-          >
-            Criar conta
-          </Button>
+  nativeButton={false}
+  className="w-full"
+  render={<Link href="/dashboard" />}
+>
+  Criar conta
+</Button>
         </form>
 
         <p className="mt-6 text-center text-sm text-muted-foreground">

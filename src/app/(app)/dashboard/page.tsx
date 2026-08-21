@@ -33,11 +33,11 @@ export default function Home() {
     categoryStyles[activeDashboard.category];
 
   return (
-    <div className="mx-auto flex w-full max-w-[1440px] flex-col gap-7">
+    <div className="mx-auto flex w-full max-w-360 flex-col gap-7">
       <header className="border-b border-border pb-5">
-        <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
+        <div className="flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
-            <p className="mb-2 text-[11px] font-medium uppercase tracking-[0.1em] text-muted-foreground">
+            <p className="mb-2 text-[11px] font-medium uppercase tracking-widest text-muted-foreground">
               Visão geral
             </p>
 
@@ -49,7 +49,7 @@ export default function Home() {
                 )}
               />
 
-              <h1 className="text-2xl font-semibold tracking-tight text-foreground">
+              <h1 className="text-xl font-semibold tracking-tight text-foreground sm:text-2xl">
                 {activeDashboard.title}
               </h1>
             </div>
@@ -120,7 +120,7 @@ export default function Home() {
             data={weeklyStepsSeries}
             goal={dailyStepsGoal}
             goalLabel="Meta diária"
-            className="h-64 w-full"
+            className="h-48 w-full sm:h-56 lg:h-64"
           />
         </div>
       </section>

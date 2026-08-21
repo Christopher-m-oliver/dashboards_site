@@ -52,7 +52,7 @@ export const fitnessMetrics: MetricReading[] = [
       tone: "positive",
       value: 6,
       unit: "%",
-      comparisonLabel: "comparado a ontem",
+      comparisonLabel: "desde ontem",
     },
   },
   {
@@ -65,7 +65,7 @@ export const fitnessMetrics: MetricReading[] = [
       tone: "neutral",
       value: 140,
       unit: "kcal",
-      comparisonLabel: "comparado a ontem",
+      comparisonLabel: "desde ontem",
     },
   },
   {
@@ -79,7 +79,7 @@ export const fitnessMetrics: MetricReading[] = [
       tone: "neutral",
       value: 0.3,
       unit: "kg",
-      comparisonLabel: "comparado à semana passada",
+      comparisonLabel: "desde a semana passada",
     },
   },
   {
@@ -91,7 +91,7 @@ export const fitnessMetrics: MetricReading[] = [
       tone: "positive",
       value: 1,
       unit: "treino",
-      comparisonLabel: "comparado à semana passada",
+      comparisonLabel: "desde a semana passada",
     },
   },
 ];

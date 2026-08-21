@@ -20,16 +20,20 @@ export default function HomePage() {
         </p>
 
         <div className="mt-8 flex flex-wrap gap-3">
-          <Button render={<Link href="/login" />}>
-            Entrar
-          </Button>
-
           <Button
-            variant="outline"
-            render={<Link href="/register" />}
-          >
-            Criar conta
-          </Button>
+  nativeButton={false}
+  render={<Link href="/login" />}
+>
+  Entrar
+</Button>
+
+<Button
+  nativeButton={false}
+  variant="outline"
+  render={<Link href="/register" />}
+>
+  Criar conta
+</Button>
         </div>
       </div>
     </main>

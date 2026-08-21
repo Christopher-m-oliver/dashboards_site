@@ -51,10 +51,15 @@ export function MetricCard({
         </div>
       </div>
 
-      <div className="flex min-h-9 items-center gap-1.5 border-t border-border px-4 text-xs">
+      <div className="flex min-h-9 flex-wrap items-center gap-x-1.5 gap-y-1 border-t border-border px-4 py-2 text-xs">
         <Icon className={cn("size-3.5 shrink-0", tone)} />
 
-        <span className={cn("font-mono font-medium tabular-nums", tone)}>
+        <span
+          className={cn(
+            "shrink-0 font-mono font-medium tabular-nums",
+            tone
+          )}
+        >
           {formatComparisonValue(
             metric.comparison.value,
             metric.comparison.direction,
@@ -62,7 +67,7 @@ export function MetricCard({
           )}
         </span>
 
-        <span className="truncate text-muted-foreground">
+        <span className="text-muted-foreground">
           {metric.comparison.comparisonLabel}
         </span>
       </div>

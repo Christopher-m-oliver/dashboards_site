@@ -53,11 +53,12 @@ export default function LoginPage() {
           </div>
 
           <Button
-            className="w-full"
-            render={<Link href="/dashboard" />}
-          >
-            Entrar
-          </Button>
+  nativeButton={false}
+  className="w-full"
+  render={<Link href="/dashboard" />}
+>
+  Entrar
+</Button>
         </form>
 
         <p className="mt-6 text-center text-sm text-muted-foreground">

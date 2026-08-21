@@ -16,6 +16,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
   SidebarSeparator,
+  useSidebar,
 } from "@/components/ui/sidebar";
 import {
   DropdownMenu,
@@ -28,6 +29,13 @@ import { primaryNav, secondaryNav } from "@/components/layout/nav-config";
 
 export function AppSidebar() {
   const pathname = usePathname();
+  const { isMobile, setOpenMobile } = useSidebar();
+
+  const closeMobileSidebar = () => {
+    if (isMobile) {
+      setOpenMobile(false);
+  }
+};
 
   return (
     <Sidebar collapsible="icon">
@@ -37,7 +45,10 @@ export function AppSidebar() {
             <SidebarMenuButton
               size="lg"
               render={
-                <Link href="/">
+                <Link 
+                  href="/dashboard"
+                  onClick={closeMobileSidebar}
+                >
                   <div className="flex size-8 items-center justify-center rounded-md bg-primary text-primary-foreground">
                     <Gauge className="size-4" />
                   </div>
@@ -71,8 +82,12 @@ export function AppSidebar() {
                     <SidebarMenuButton
                       isActive={isActive}
                       tooltip={item.title}
-                      render={<Link href={item.href} />}
-                    >
+                      render={
+                        <Link
+                          href={item.href}
+                          onClick={closeMobileSidebar}
+                        />
+                      }                    >
                       <item.icon />
                       <span>{item.title}</span>
                     </SidebarMenuButton>
@@ -96,7 +111,12 @@ export function AppSidebar() {
                 <SidebarMenuButton
                   isActive={isActive}
                   tooltip={item.title}
-                  render={<Link href={item.href} />}
+                  render={
+                    <Link
+                      href={item.href}
+                      onClick={closeMobileSidebar}
+                    />
+                  }
                 >
                   <item.icon />
                   <span>{item.title}</span>
