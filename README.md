@@ -18,31 +18,38 @@ A aplicação tem como proposta permitir a criação e visualização de dashboa
 
 Esta etapa do projeto é focada exclusivamente no front-end.
 
-Atualmente, a aplicação utiliza dados mockados para representar o funcionamento futuro do sistema.
+Atualmente, a aplicação utiliza dados mockados para representar o funcionamento futuro do sistema e simular os principais fluxos de navegação.
 
-Não estão implementados nesta etapa:
+Não fazem parte desta etapa:
 
 - Back-end
 - Banco de dados
 - Autenticação real
 - Persistência de dados
-- Operações CRUD reais
+- Operações CRUD persistentes
 
-Essas funcionalidades serão desenvolvidas em etapas posteriores.
-
-O projeto ainda está em desenvolvimento e continuará recebendo ajustes de navegação, responsividade e refinamento visual até a data limite da atividade.
+Essas funcionalidades poderão ser desenvolvidas em etapas posteriores do projeto.
 
 ## Funcionalidades atuais
 
+- Landing page pública
+- Fluxos simulados de login e cadastro
 - Layout principal com sidebar responsiva
 - Página de visão geral
 - Indicadores de métricas
-- Gráfico com dados simulados
+- Gráficos com dados simulados
 - Acompanhamento de metas
 - Registros recentes
 - Listagem de dashboards
+- Visualização detalhada de dashboard
+- Edição simulada de dashboard
+- Gerenciamento de dados com inserção local de registros
+- Página de análises e tendências
+- Modelos de dashboards
+- Página de configurações
+- Navegação responsiva para diferentes tamanhos de tela
 
-## Executando localmente
+## Execução local
 
 ### Requisitos
 
@@ -72,3 +79,9 @@ npm run dev
 ```
 
 Depois, acesse: [http://localhost:3000](http://localhost:3000)
+
+##Observações
+
+Os dados utilizados atualmente são simulados.
+
+A inclusão de registros na área de gerenciamento de dados é feita apenas no estado local da interface e não permanece após recarregar a página.
