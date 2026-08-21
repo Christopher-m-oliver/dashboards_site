@@ -80,7 +80,7 @@ npm run dev
 
 Depois, acesse: [http://localhost:3000](http://localhost:3000)
 
-##Observações
+## Observações
 
 Os dados utilizados atualmente são simulados.
 
